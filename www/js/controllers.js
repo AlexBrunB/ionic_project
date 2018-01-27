@@ -30,6 +30,16 @@ angular.module('starter.controllers', [])
       };
     })
 
+    .controller('SellersCtrl', function($scope,Sellers,$stateParams, $state) {
+       Sellers.all(function(data) {
+         $scope.sellers = data;
+       });
+      //$scope.goToSection= function(sect){
+        //$state.go('tab.newsTitles',{ServiceProvider: sect.ServiceProvider, section: sect.title, url: sect.url});
+      //};
+      
+      })
+
 .controller('SignupCtrl', function($scope, $state, BackendAPI) {
   $scope.newUser = {name: null, email: null, password: null };
   $scope.doSignup= function(){
