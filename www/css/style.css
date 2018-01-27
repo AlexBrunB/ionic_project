@@ -42,3 +42,7 @@ ion-content {
 ion-nav-bar {
     background-color: rgb(36,68,92);
 }
+
+ion-view {
+  background-color: rgb(36,68,92);
+}

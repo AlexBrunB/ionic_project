@@ -1,37 +1,39 @@
 angular.module('starter.controllers', [])
 .controller('LoginCtrl', function($scope, $state, BackendAPI, $ionicLoading, $ionicPopup) {
-  $scope.loginUser = { login: null, password: null };
-  $scope.goToSignup = function(){
-$state.go('signup');
-};
-$scope.doLoging = function(){
-$ionicLoading.show({
-  template: 'Loading...'
-});
-BackendAPI.login($scope.loginUser)
-.then(function(res){
-$state.go('tab.dash');
-})
-.catch(function(err) {
-console.log("Connection error : "+ JSON.stringify(err));
-$ionicLoading.hide();
-$ionicPopup.show({
-  template: 'An error happened... D:',
-  title: 'login',
-  buttons: [{text: 'cancel'}]
-});
-})
-.finally(function() {
-console.log("Finish ");
-ionicLoading.hide();
-});
-};
-})
+    $scope.loginUser = { login: null, password: null };
+    $scope.goToSignup = function(){
+    $state.go('signup');
+  };
+  $scope.doLoging = function(){
+    $ionicLoading.show({
+      template: 'Loading...'
+        });
+        console.log('user : ' + $scope.loginUser);
+        BackendAPI.login($scope.loginUser)
+        .then(function(res){
+          $ionicLoading.hide();
+          $state.go('tab.dash');
+        })
+        .catch(function(err) {
+          console.log("Connection error : "+ JSON.stringify(err));
+          $ionicLoading.hide();
+          $ionicPopup.show({
+            template: err.data.message,
+            title: 'An error occured',
+            buttons: [{text: 'cancel'}]
+          });
+        })
+        .finally(function() {
+          console.log("Finish ");
+          ionicLoading.hide();
+        });
+      };
+    })
 
 .controller('SignupCtrl', function($scope, $state, BackendAPI) {
   $scope.newUser = {name: null, email: null, password: null };
   $scope.doSignup= function(){
-BackendAPI.register($scope.newUser)
+    BackendAPI.register($scope.newUser)
 .then(function(res){
 $state.go('tab.dash');
 })
@@ -67,6 +69,10 @@ console.log("Finish ");
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, $state, BackendAPI) {
+  $scope.currUser = BackendAPI;
 
+  $scope.logout = function() {
+    $state.go('login');
+  }
 });
