@@ -1,5 +1,5 @@
 angular.module('starter.controllers', [])
-.controller('LoginCtrl', function($scope, $state, BackendAPI, $ionicLoading, $ionicPopup) {
+.controller('LoginCtrl', function($scope, $rootScope, $state, BackendAPI, $ionicLoading, $ionicPopup) {
     $scope.loginUser = { login: null, password: null };
     $scope.goToSignup = function(){
     $state.go('signup');
@@ -8,10 +8,10 @@ angular.module('starter.controllers', [])
     $ionicLoading.show({
       template: 'Loading...'
         });
-        console.log('user : ' + $scope.loginUser);
         BackendAPI.login($scope.loginUser)
         .then(function(res){
           $ionicLoading.hide();
+          $rootScope.currUser = res.data;
           $state.go('tab.dash');
         })
         .catch(function(err) {
@@ -29,7 +29,6 @@ angular.module('starter.controllers', [])
         });
       };
     })
-
     .controller('SellersCtrl', function($scope,Sellers,$stateParams, $state) {
        Sellers.all(function(data) {
          $scope.sellers = data;
@@ -37,9 +36,8 @@ angular.module('starter.controllers', [])
       //$scope.goToSection= function(sect){
         //$state.go('tab.newsTitles',{ServiceProvider: sect.ServiceProvider, section: sect.title, url: sect.url});
       //};
-      
-      })
 
+      })
 .controller('SignupCtrl', function($scope, $state, BackendAPI) {
   $scope.newUser = {name: null, email: null, password: null };
   $scope.doSignup= function(){
@@ -80,10 +78,57 @@ console.log("Finish ");
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope, $state, BackendAPI) {
-  $scope.currUser = BackendAPI;
+.controller('AccountCtrl', function($scope, $rootScope, $state, BackendAPI) {
+  $scope.profilEdit = {status:false};
+
 
   $scope.logout = function() {
+    $scope.currUser = null;
     $state.go('login');
-  }
+  };
+
+  $scope.editclick = function() {
+    console.log('prev: ' + $scope.profilEdit.status);
+    $scope.profilEdit.status = !$scope.profilEdit.status;
+        console.log('next: ' + $scope.profilEdit.status);
+  };
 });
+
+  }
+})
+  .controller('ProductsCtrl', function($scope, $stateParams, Products) {
+    Products.all($stateParams.sellerId, function(data) {
+      $scope.products = data;
+      $scope.panier = {};
+      for (var i = 0; i < $scope.products.length; i++) {
+        $scope.panier[$scope.products[i].id] = {};
+        $scope.panier[$scope.products[i].id].quantity = 0;
+        $scope.getTotalPrice = function(item) {
+          return $scope.panier[item.id].quantity * item.price;
+        };
+        $scope.increaseQuantity = function(item) {
+          $scope.panier[item.id].quantity += 1;
+        };
+        $scope.decreaseQuantity = function(item) {
+          $scope.panier[item.id].quantity -= 1;
+          if ($scope.panier[item.id].quantity < 0) {
+            $scope.panier[item.id].quantity = 0;
+          }
+        };
+        $scope.orderCmd = function() {
+          cmd = {};
+          var j = 0;
+          for (var i = 0; i < $scope.products.length; i++) {
+            if ($scope.panier[$scope.products[i].id].quantity !== 0) {
+              cmd[j] = {};
+              cmd[j].quantity = $scope.panier[$scope.products[i].id].quantity;
+              cmd[j].products = $scope.products[i];
+              j++
+            }
+          }
+          $scope.cmd = cmd;
+          console.log(cmd);
+        }
+      }
+    })
+  });
