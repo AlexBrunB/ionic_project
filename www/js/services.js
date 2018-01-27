@@ -16,6 +16,22 @@ angular.module('starter.services', [])
   };
 })
 
+  .factory('Products', function($http) {
+    var baseURL ="https://api.backendless.com/81BE0A2A-D0FC-E7B7-FF4F-0A718CD0A500/A3226DA6-3397-8FB6-FFFD-306838125B00/data";
+    var header ={ 'Content-Type': 'application/json' };
+    return {
+      all: function(sellerId, callback) {
+        $http.get(baseURL + "/Products?where=seller.id%3D" + sellerId, header).then(
+          function(response) {
+            callback(response.data);
+          }, function(error) {
+            console.log(error);
+          }
+        )
+      }
+    };
+  })
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
@@ -63,4 +79,29 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+.factory('Sellers', function($http, $rootScope) {
+  var baseUrl = "https://api.backendless.com/81BE0A2A-D0FC-E7B7-FF4F-0A718CD0A500/A3226DA6-3397-8FB6-FFFD-306838125B00/data";
+  return {
+    all: function(callback) {
+      $http.get(baseUrl + '/Sellers').then(
+        function(response) {
+          console.log(response.data);
+          callback(response.data);
+        }, function(error) {
+          console.log(error);
+        }
+      )
+    },
+    getSeller: function(sellerId) {
+      for (var i = 0; i < $rootScope.sellers.length; i++) {
+        if ($rootScope.sellers[i].id === sellerId) {
+          return $rootScope.sellers[i];
+        }
+      }
+      return null;
+    }
+  };
+
+})

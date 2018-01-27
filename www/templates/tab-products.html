@@ -1,0 +1,28 @@
+<ion-view view-title="Products">
+  <ion-content class="padding">
+  <ion-list>
+    <ion-item ng-repeat="i in products" class="item-remove-animate item-logo item-icon-right" style="">
+      <img ng-src="{{i.img}}" style="height: 64px;width: 64px;"/>
+      <h1 style="font-size: 15px;">{{i.name}}</h1>
+      <textarea rows="10" cols="50" style="font-size: 10px;resize: none;">{{i.description}}</textarea>
+      <span>Price per gram : {{i.price}}€</span>
+      <br/>
+      <br/>
+      <div style="float: left;">
+        <button ng-click="decreaseQuantity(i)">-</button>
+        <span>{{panier[i.id].quantity}}g</span>
+        <button ng-click="increaseQuantity(i)">+</button>
+      </div>
+      <div style="float: right;">
+        <span>Total Price : {{getTotalPrice(i)}}€</span>
+      </div>
+
+    </ion-item>
+  </ion-list>
+  </ion-content>
+  <ion-footer-bar>
+    <button ion-button style="position: absolute;right: 0;margin-right:  30px;width: 150px;" ng-click="orderCmd()">
+      Order now !
+    </button>
+  </ion-footer-bar>
+</ion-view>

@@ -71,6 +71,7 @@ controller: 'SignupCtrl'
         }
       }
     })
+
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
@@ -81,6 +82,16 @@ controller: 'SignupCtrl'
       }
     })
 
+  .state('tab.sellers', {
+  url: '/sellers',
+  views : {
+    'tab-sellers' : {
+      templateUrl : 'templates/tab-sellers.html',
+      controller : 'SellersCtrl'
+    }
+  }
+})
+
   .state('tab.account', {
     url: '/account',
     views: {
@@ -89,7 +100,16 @@ controller: 'SignupCtrl'
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
+    .state('tab.products', {
+      url: '/products/:sellerId',
+      views: {
+        'tab-products': {
+          templateUrl: 'templates/tab-products.html',
+          controller: 'ProductsCtrl'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
