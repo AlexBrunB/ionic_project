@@ -92,9 +92,6 @@ console.log("Finish ");
     $scope.profilEdit.status = !$scope.profilEdit.status;
         console.log('next: ' + $scope.profilEdit.status);
   };
-});
-
-  }
 })
   .controller('ProductsCtrl', function($scope, $stateParams, Products) {
     Products.all($stateParams.sellerId, function(data) {
