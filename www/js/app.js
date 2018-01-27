@@ -89,7 +89,16 @@ controller: 'SignupCtrl'
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
+    .state('tab.products', {
+      url: '/products/:sellerId',
+      views: {
+        'tab-products': {
+          templateUrl: 'templates/tab-products.html',
+          controller: 'ProductsCtrl'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

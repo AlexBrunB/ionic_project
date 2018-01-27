@@ -4,8 +4,8 @@ angular.module('starter.services', [])
 })
 
 .factory('BackendAPI', function($http) {
-var baseURL ="https://api.backendless.com/81BE0A2A-D0FC-E7B7-FF4F-0A718CD0A500/A3226DA6-3397-8FB6-FFFD-306838125B00/";
-var header ={ 'Content-Type': 'application/json' };
+  var baseURL ="https://api.backendless.com/81BE0A2A-D0FC-E7B7-FF4F-0A718CD0A500/A3226DA6-3397-8FB6-FFFD-306838125B00/";
+  var header ={ 'Content-Type': 'application/json' };
 return {
 register: function(data) {
 return $http.post(baseURL+"users/register", data, header);
@@ -15,6 +15,22 @@ return $http.post(baseURL+"users/login", data, header);
 }
 };
 })
+
+  .factory('Products', function($http) {
+    var baseURL ="https://api.backendless.com/81BE0A2A-D0FC-E7B7-FF4F-0A718CD0A500/A3226DA6-3397-8FB6-FFFD-306838125B00/data";
+    var header ={ 'Content-Type': 'application/json' };
+    return {
+      all: function(sellerId, callback) {
+        $http.get(baseURL + "/Products?where=seller.id%3D" + sellerId, header).then(
+          function(response) {
+            callback(response.data);
+          }, function(error) {
+            console.log(error);
+          }
+        )
+      }
+    };
+  })
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
