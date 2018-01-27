@@ -1,5 +1,5 @@
 angular.module('starter.controllers', [])
-.controller('LoginCtrl', function($scope, $state, BackendAPI, $ionicLoading, $ionicPopup) {
+.controller('LoginCtrl', function($scope, $rootScope, $state, BackendAPI, $ionicLoading, $ionicPopup) {
     $scope.loginUser = { login: null, password: null };
     $scope.goToSignup = function(){
     $state.go('signup');
@@ -8,10 +8,10 @@ angular.module('starter.controllers', [])
     $ionicLoading.show({
       template: 'Loading...'
         });
-        console.log('user : ' + $scope.loginUser);
         BackendAPI.login($scope.loginUser)
         .then(function(res){
           $ionicLoading.hide();
+          $rootScope.currUser = res.data;
           $state.go('tab.dash');
         })
         .catch(function(err) {
@@ -58,6 +58,7 @@ console.log("Finish ");
 
 })
 
+
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -77,11 +78,22 @@ console.log("Finish ");
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope, $state, BackendAPI) {
-  $scope.currUser = BackendAPI;
+.controller('AccountCtrl', function($scope, $rootScope, $state, BackendAPI) {
+  $scope.profilEdit = {status:false};
+
 
   $scope.logout = function() {
+    $scope.currUser = null;
     $state.go('login');
+  };
+
+  $scope.editclick = function() {
+    console.log('prev: ' + $scope.profilEdit.status);
+    $scope.profilEdit.status = !$scope.profilEdit.status;
+        console.log('next: ' + $scope.profilEdit.status);
+  };
+});
+
   }
 })
   .controller('ProductsCtrl', function($scope, $stateParams, Products) {

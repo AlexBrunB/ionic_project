@@ -6,14 +6,14 @@ angular.module('starter.services', [])
 .factory('BackendAPI', function($http) {
   var baseURL ="https://api.backendless.com/81BE0A2A-D0FC-E7B7-FF4F-0A718CD0A500/A3226DA6-3397-8FB6-FFFD-306838125B00/";
   var header ={ 'Content-Type': 'application/json' };
-return {
-register: function(data) {
-return $http.post(baseURL+"users/register", data, header);
-},
-login: function(data) {
-return $http.post(baseURL+"users/login", data, header);
-}
-};
+  return {
+    register: function(data) {
+      return $http.post(baseURL+"users/register", data, header);
+    },
+    login: function(data) {
+      return $http.post(baseURL+"users/login", data, header);
+    }
+  };
 })
 
   .factory('Products', function($http) {

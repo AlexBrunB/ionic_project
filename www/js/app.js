@@ -92,6 +92,16 @@ controller: 'SignupCtrl'
   }
 })
 
+  .state('tab.final', {
+  url: '/sellers/final',
+  views : {
+    'tab-final' : {
+      templateUrl : 'templates/tab-final.html',
+      controller : 'SellersCtrl'
+    }
+  }
+})
+
   .state('tab.account', {
     url: '/account',
     views: {
