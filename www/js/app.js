@@ -104,7 +104,7 @@ controller: 'SignupCtrl'
     .state('tab.products', {
       url: '/products/:sellerId',
       views: {
-        'tab-products': {
+        'tab-sellers': {
           templateUrl: 'templates/tab-products.html',
           controller: 'ProductsCtrl'
         }

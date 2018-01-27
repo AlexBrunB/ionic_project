@@ -1,11 +1,10 @@
 <ion-view view-title="{{currentSellers}}">
     <ion-content class="padding">
       <ion-list id="Sellers-list">
-      <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="x in sellers | filter: currentSellers" ng-click="goToSeller(x)">
-        <!--<img ng-src="img/{{currentSellers}}.png" /> -->
+      <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="x in sellers | filter: currentSellers" href="#/tab/products/{{x.id}}">
+        <img ng-src="{{x.img}}" />
         <h2 >{{x.name}}</h2>
       </ion-item>
     </ion-list>
     </ion-content>
   </ion-view>
-  
