@@ -93,7 +93,7 @@ console.log("Finish ");
         console.log('next: ' + $scope.profilEdit.status);
   };
 })
-  .controller('ProductsCtrl', function($scope, $stateParams, Products) {
+  .controller('ProductsCtrl', function($scope, $state, $stateParams, Products) {
     Products.all($stateParams.sellerId, function(data) {
       $scope.products = data;
       $scope.panier = {};
@@ -113,7 +113,7 @@ console.log("Finish ");
           }
         };
         $scope.orderCmd = function() {
-          cmd = {};
+          var cmd = [];
           var j = 0;
           for (var i = 0; i < $scope.products.length; i++) {
             if ($scope.panier[$scope.products[i].id].quantity !== 0) {
@@ -123,9 +123,25 @@ console.log("Finish ");
               j++
             }
           }
-          $scope.cmd = cmd;
-          console.log(cmd);
+          $state.go('tab.final', { order : cmd});
         }
       }
     })
+  })
+  .controller('FinalCtrl', function($scope, $stateParams) {
+
+    $scope.order = $stateParams.order;
+    $scope.getProductTotalPrice = function(item) {
+      return item.quantity * item.products.price;
+    };
+    $scope.getOrderTotalPrice = function(orders) {
+      if (orders == null) {
+        return 0;
+      }
+      var total = 0;
+      for (var i = 0; i < orders.length; i++) {
+        total = total + (orders[i].quantity * orders[i].products.price);
+      }
+      return total;
+    };
   });

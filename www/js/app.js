@@ -95,11 +95,12 @@ controller: 'SignupCtrl'
   .state('tab.final', {
   url: '/sellers/final',
   views : {
-    'tab-final' : {
+    'tab-sellers' : {
       templateUrl : 'templates/tab-final.html',
-      controller : 'SellersCtrl'
+      controller : 'FinalCtrl'
     }
-  }
+  },
+    params : {order : null}
 })
 
   .state('tab.account', {
