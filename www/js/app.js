@@ -71,6 +71,7 @@ controller: 'SignupCtrl'
         }
       }
     })
+
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
@@ -80,6 +81,16 @@ controller: 'SignupCtrl'
         }
       }
     })
+
+  .state('tab.sellers', {
+  url: '/sellers',
+  views : {
+    'tab-sellers' : {
+      templateUrl : 'templates/tab-sellers.html',
+      controller : 'SellersCtrl'
+    }
+  }
+})
 
   .state('tab.account', {
     url: '/account',

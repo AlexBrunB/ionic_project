@@ -79,4 +79,29 @@ return $http.post(baseURL+"users/login", data, header);
       return null;
     }
   };
-});
+})
+
+.factory('Sellers', function($http, $rootScope) {
+  var baseUrl = "https://api.backendless.com/81BE0A2A-D0FC-E7B7-FF4F-0A718CD0A500/A3226DA6-3397-8FB6-FFFD-306838125B00/data";
+  return {
+    all: function(callback) {
+      $http.get(baseUrl + '/Sellers').then(
+        function(response) {
+          console.log(response.data);
+          callback(response.data);
+        }, function(error) {
+          console.log(error);
+        }
+      )
+    },
+    getSeller: function(sellerId) {
+      for (var i = 0; i < $rootScope.sellers.length; i++) {
+        if ($rootScope.sellers[i].id === sellerId) {
+          return $rootScope.sellers[i];
+        }
+      }
+      return null;
+    }
+  };
+
+})
