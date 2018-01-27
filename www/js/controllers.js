@@ -1,6 +1,52 @@
 angular.module('starter.controllers', [])
+.controller('LoginCtrl', function($scope, $state, BackendAPI, $ionicLoading, $ionicPopup) {
+  $scope.loginUser = { login: null, password: null };
+  $scope.goToSignup = function(){
+$state.go('signup');
+};
+$scope.doLoging = function(){
+$ionicLoading.show({
+  template: 'Loading...'
+});
+BackendAPI.login($scope.loginUser)
+.then(function(res){
+$state.go('tab.dash');
+})
+.catch(function(err) {
+console.log("Connection error : "+ JSON.stringify(err));
+$ionicLoading.hide();
+$ionicPopup.show({
+  template: 'An error happened... D:',
+  title: 'login',
+  buttons: [{text: 'cancel'}]
+});
+})
+.finally(function() {
+console.log("Finish ");
+ionicLoading.hide();
+});
+};
+})
 
-.controller('DashCtrl', function($scope) {})
+.controller('SignupCtrl', function($scope, $state, BackendAPI) {
+  $scope.newUser = {name: null, email: null, password: null };
+  $scope.doSignup= function(){
+BackendAPI.register($scope.newUser)
+.then(function(res){
+$state.go('tab.dash');
+})
+.catch(function(err) {
+console.log("Connection error : "+ JSON.stringify(err));
+})
+.finally(function() {
+console.log("Finish ");
+});
+};
+})
+.controller('DashCtrl', function($scope) {
+
+
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -22,7 +68,5 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+
 });

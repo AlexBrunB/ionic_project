@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      StatusBar.styleLightContent();
     }
   });
 })
@@ -32,18 +32,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $stateProvider
 
   // setup an abstract state for the tabs directive
-  .state('login', {
-  url: '/login',
-  templateUrl: 'templates/login.html',
-  controller: 'LoginCtrl'
-})
-
-.state('signup', {
-url: '/signup',
-templateUrl: 'templates/signup.html',
-controller: 'SignupCtrl'
-})
-
     .state('tab', {
     url: '/tab',
     abstract: true,
@@ -52,46 +40,38 @@ controller: 'SignupCtrl'
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.form1', {
+    url: '/form1',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-form1': {
+        templateUrl: 'templates/tab-form1.html',
+        controller: 'Form1Ctrl'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.form2', {
+    url: '/form2',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-form2': {
+        templateUrl: 'templates/tab-form2.html',
+        controller: 'Form2Ctrl'
+      }
+    }
+  })
+
+  .state('tab.form3', {
+    url: '/form3',
+    views: {
+      'tab-form3': {
+        templateUrl: 'templates/tab-form3.html',
+        controller: 'Form3Ctrl'
       }
     }
   });
 
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/tab/form1');
 
 });

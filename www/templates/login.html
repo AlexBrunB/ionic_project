@@ -1,0 +1,18 @@
+<ion-view view-title="Login">
+  <ion-content class="padding">
+    <form id="login" >
+<ion-list>
+	<ion-item class="item-input">
+		<span class="input-label">Email</span>
+		<input type="email" ng-model="loginUser.login">
+	</ion-item>
+<ion-item class="item-input">
+	<span class="input-label">Password</span>
+	<input type="password" ng-model="loginUser.password" >
+</ion-item>
+</ion-list>
+	<button class="button button-positive button-block" ng-click="doLoging()">Log in</button>
+	<button class="button button-positive button-block button-outline" ng-click="goToSignup()">Signup</button>
+</form>
+  </ion-content>
+</ion-view>

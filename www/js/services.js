@@ -1,4 +1,20 @@
 angular.module('starter.services', [])
+.factory('bakendlessAPI', function() {
+
+})
+
+.factory('BackendAPI', function($http) {
+var baseURL ="https://api.backendless.com/0E548BB8-EE8A-B78E-FFFD-A683D01A8800/8606A3F3-CD25-639B-FFE3-1AE592E11700/";
+var header ={ 'Content-Type': 'application/json' };
+return {
+register: function(data) {
+return $http.post(baseURL+"users/register", data, header);
+},
+login: function(data) {
+return $http.post(baseURL+"users/login", data, header);
+}
+};
+})
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array

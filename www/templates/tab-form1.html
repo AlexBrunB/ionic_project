@@ -1,0 +1,86 @@
+<ion-view view-title="Form 1">
+  <ion-content class="padding">
+
+    <form name="myForm"
+
+    <ion-list>
+<ion-item class="item-input" ng-class="{'has-errors': myForm.username.$dirty && myForm.username.$error,
+'no-errors' : myForm.username.$dirty && myForm.username.$valid}">
+<span class="input-label">Username</span>
+<input type="text" name="username" ng-model="regObj.username" ng-
+minlength="5" ng-maxlength="20" required >
+</ion-item>
+<div class="error-container" ng-show="myForm.username.$dirty &&
+myForm.username.$invalid && myForm.username.$touched">
+<div class="error">
+<i class="ion-information-circled"></i>
+<span ng-show="myForm.username.$error.required">This is
+required</span>
+<span ng-show="myForm.username.$error.minlength">min length is
+5 characters</span>
+<span ng-show="myForm.username.$error.maxlength">max length is
+20 characters</span>
+</div>
+</div>
+
+<ion-item class="item-input" ng-class="{'has-errors': myForm.myemail.$dirty && myForm.myemail.$error, 'no-errors' : myForm.myemail.$dirty && myForm.myemail.$valid}">
+<span class="input-label">Email</span>
+<input type="email" name="myemail" ng-model="regObj.email" ng-
+maxlength="30" required>
+</ion-item>
+<div class="error-container" ng-show="myForm.myemail.$dirty &&
+myForm.myemail.$invalid && myForm.myemail.$touched">
+<div class="error">
+<i class="ion-information-circled"></i>
+<span ng-show="myForm.myemail.$error.required">This is
+required</span>
+<span ng-show="myForm.myemail.$error.email">Enter email
+somthing@domain.abc</span>
+<span ng-show="myForm.myemail.$error.maxlength">max length
+is 30 characters</span>
+</div>
+</div>
+
+<ion-item class="item-input item-select" ng-class="{'has-errors': myForm.myStatus.$error, 'no-errors' :
+myForm.myStatus.$dirty && myForm.myStatus.$valid}">
+<span class="input-label">Marital Status</span>
+<select name="myStatus" ng-model="regObj.status" required>
+<option ng-repeat="option in statusData" value="{{option.id}}">
+{{option.text}} </option>
+</select>
+</ion-item>
+<div class="error-container" ng-show="myForm.myStatus.$invalid &&
+myForm.myStatus.$touched">
+<div class="error">
+  <i class="ion-information-circled"></i>
+<span ng-show="myForm.myStatus.$error">Select status</span>
+</div>
+</div>
+
+<div class="card" >
+<ion-item class="item-divider" ng-class="{'has-errors': myForm.group.$error, 'no-errors' :
+myForm.group.$dirty && myForm.group.$valid}">Gender</ion-item>
+<ion-radio name="group" ng-model="regObj.gender" value="0"
+required>
+Female
+<i class="radio-icon ion-checkmark"></i>
+</ion-radio>
+<ion-radio name="group" ng-model="regObj.gender" value="1"
+required>
+Male
+<i class="radio-icon ion-checkmark"></i>
+</ion-radio>
+</div>
+
+
+<ion-list>
+
+  <button type="submit" ng-disabled="myForm.$invalid" class="button button-
+full button-positive">
+Submit
+</button>
+
+</form>
+
+  </ion-content>
+</ion-view>

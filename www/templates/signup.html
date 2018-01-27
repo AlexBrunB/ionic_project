@@ -1,0 +1,40 @@
+<ion-view view-title="Signup">
+  <ion-content class="padding">
+
+    <form id="signup" >
+<ion-list >
+<ion-item class="item-input">
+<span class="input-label">Name</span>
+<input type="text" ng-model="newUser.name">
+</ion-item>
+<ion-item class="item-input">
+<span class="input-label">Email</span>
+<input type="email" ng-model="newUser.email" >
+</ion-item>
+<ion-item class="item-input">
+<span class="input-label">Password</span>
+<input type="password" ng-model="newUser.password">
+</ion-item>
+<ion-item class="item-input">
+<span class="input-label">BOD</span>
+<input type="date" ng-model="newUser.BOD">
+</ion-item>
+<ion-item class=" item-select" ng-model="newUser.gender"
+<span class="input-label">Gender</span>
+<select>
+<option>Male</option>
+<option>Female</option>
+</select>
+</ion-item >
+<ion-toggle toggle-class="toggle-positive" ng-model="newUser.
+subscribe">
+Subscribe to mail list
+</ion-toggle>
+<ion-checkbox ng-model="newUser. agree">
+Agree to the terms &amp; condition
+</ion-checkbox>
+<button class="button button-positive button-block" ng-click="doSignup()">Sign up</button>
+</ion-
+
+  </ion-content>
+</ion-view>
