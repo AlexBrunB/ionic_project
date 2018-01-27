@@ -3,22 +3,43 @@
 
     <form id="profil" >
     <ion-list>
-      <ion-item class="item-input">
+      <ion-item id = "name" class="item-input">
         <ion-label>Username</ion-label>
-        <ion-input type="text" ng-disabled="{{profilEdit.status}}" ng-model="profil.name">{{profilEdit.status}} {{currUser.name}}</ion-input>
+        <ion-input type="text" readonly="true">{{currUser.name}}</ion-input>
       </ion-item>
-      <ion-item class="item-input">
+      <ion-item id = "nameb" class="item-input ng-hide">
+        <ion-label>Username</ion-label>
+        <input type="text" placeholder="{{currUser.name}}"></input>
+      </ion-item>
+
+
+      <ion-item id = "bod" class="item-input">
         <ion-label>Birthday date</ion-label>
         <ion-input type="text" ng-disabled="{{profilEdit.status}}" ng-model="profil.bod">{{currUser.BOD | date : 'dd/MM/yyyy'}}</ion-input>
       </ion-item>
-      <ion-item class="item-input">
+      <ion-item id = "bodb" class="item-input ng-hide">
+        <ion-label>Birthday date</ion-label>
+        <input type="date" placeholder="{{currUser.BOD | date : 'dd/MM/yyyy'}}"></input>
+      </ion-item>
+
+      <ion-item id = "mail" class="item-input">
         <ion-label>Email adress</ion-label>
         <ion-input type="email" ng-disabled="{{profilEdit.status}}" ng-model="profil.mail">{{currUser.email}}</ion-input>
       </ion-item>
-      <ion-item class="item-input">
-        <ion-label>Newsletter subscription</ion-label>
-        <ion-checkbox  ng-disabled="{{profilEdit.status}}" ng-checked="{{currUser.subscribe}}" ng-model="profil.sub"></ion-checkbox>
+      <ion-item id = "mailb" class="item-input ng-hide">
+        <ion-label>Email adress</ion-label>
+        <input type="email" placeholder="{{currUser.email}}"></input>
       </ion-item>
+
+      <ion-item id = "sub" class="item-input">
+        <ion-label>Newsletter subscription</ion-label>
+        <ion-checkbox  ng-disabled="true" ng-checked="{{currUser.subscribe}}" ></ion-checkbox>
+      </ion-item>
+      <ion-item id = "subb" class="item-input ng-hide">
+        <ion-label>Newsletter subscription</ion-label>
+        <ion-checkbox ng-checked="{{currUser.subscribe}}"></ion-checkbox>
+      </ion-item>
+
     </ion-list>
 
   <button class="button button-balanced button-block" ng-click="editclick()">Edit profile</button>
