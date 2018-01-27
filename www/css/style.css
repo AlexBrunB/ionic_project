@@ -33,3 +33,12 @@
 .no-errors {
   border-bottom: 3px solid green;
 }
+
+ion-content {
+  background-color: rgb(36,68,92);
+  text-color
+}
+
+ion-nav-bar {
+    background-color: rgb(36,68,92);
+}
