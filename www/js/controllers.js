@@ -80,16 +80,33 @@ angular.module('starter.controllers', [])
 
 .controller('AccountCtrl', function($scope, $rootScope, $state, BackendAPI) {
   $scope.profilEdit = {status:true};
-
+  $scope.editbutt = "Edit profile";
+  $scope.cancelbutt = "Log out";
 
   $scope.logout = function() {
+    if ($scope.cancelbutt == "Log out") {
     $scope.currUser = null;
     $state.go('login');
+  }
+  else {
+    $scope.editbutt = "Edit profile";
+    $scope.cancelbutt = "Log out";
+    document.getElementById('name').classList.remove('ng-hide');
+    document.getElementById('bod').classList.remove('ng-hide');
+    document.getElementById('mail').classList.remove('ng-hide');
+    document.getElementById('sub').classList.remove('ng-hide');
+    document.getElementById('nameb').classList.add('ng-hide');
+    document.getElementById('bodb').classList.add('ng-hide');
+    document.getElementById('mailb').classList.add('ng-hide');
+    document.getElementById('subb').classList.add('ng-hide');
+  }
   };
 
   $scope.editclick = function() {
     $scope.profilEdit.status = !$scope.profilEdit.status;
     if ($scope.profilEdit.status == false) {
+      $scope.editbutt = "Save changes";
+      $scope.cancelbutt = "Cancel";
       document.getElementById('name').classList.add('ng-hide'); // Comme ng-disabled="" en fait qu'à sa tête reste la méthode de gros porc
       document.getElementById('bod').classList.add('ng-hide');
       document.getElementById('mail').classList.add('ng-hide');
@@ -100,6 +117,11 @@ angular.module('starter.controllers', [])
       document.getElementById('subb').classList.remove('ng-hide');
     }
     else {
+      /*
+      ** Mettre la requête PUT ici pour update le profile
+      */
+      $scope.editbutt = "Edit profile";
+      $scope.cancelbutt = "Log out";
       document.getElementById('name').classList.remove('ng-hide');
       document.getElementById('bod').classList.remove('ng-hide');
       document.getElementById('mail').classList.remove('ng-hide');
